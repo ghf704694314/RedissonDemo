@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: demo
+  jpa:
+    hibernate:
+      ddl-auto: update
 jpa:
   properties:
     hibernate:

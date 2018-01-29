@@ -40,13 +40,15 @@ public class DemoApplication {
 	}
 
 	/**
-	 * 使用dev的redis单节点集群
+	 * 使用本机的redis三主三从集群
 	 * @return
 	 */
 	@Bean
 	public RedissonClient redissonClient(){
 		Config config=new Config();
-		config.useSingleServer().setAddress("redis.ops.com:6400").setDatabase(30).setPassword("tbbdev");
+		//可以直接指定一主来获取集群
+		config.useClusterServers().addNodeAddress("127.0.0.1:7000");
+//		config.useClusterServers().addNodeAddress("127.0.0.1:7000","127.0.0.1:7001","127.0.0.1:7002","127.0.0.1:7003","127.0.0.1:7004","127.0.0.1:7005");
 		return Redisson.create(config);
 	}
 }
